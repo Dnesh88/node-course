@@ -1,21 +1,60 @@
-/* 1. writing to file 
- //importing core module fs (no file path)
- const fs = require("fs");
-
-fs.writeFileSync("notes.txt", "My name is Dinesh.");
-fs.appendFileSync("notes.txt", "\nI am a coding god really.");
- */
-
-/* 2. importing function from custom module
-// import custom module
-const addition = require("./utils.js");
-const sum = addition(2, 2); //using imported function
-console.log(sum);
-*/
-
-/* 3. getNotes() 
+const chalk = require("chalk");
+const yargs = require("yargs");
 const getNotes = require("./notes.js");
-console.log(getNotes());
-*/
 
-//
+// customize yargs version
+yargs.version("1.1.0");
+
+// create add command
+yargs.command({
+  command: "add",
+  describe: "Add a new note",
+  builder: {
+    title: {
+      describe: "Note title",
+      demandOption: true,
+      type: "string",
+    },
+    body: {
+      describe: "Note body",
+      demandOption: true,
+      type: "string",
+    },
+  },
+  handler: function (argv) {
+    console.log(argv);
+    console.log("Title: ", argv.title);
+    console.log("Body: ", argv.body);
+  },
+});
+
+// create remove command
+yargs.command({
+  command: "remove",
+  describe: "Remove a note",
+  handler: function () {
+    console.log("Removing a note!");
+  },
+});
+
+// create list command
+yargs.command({
+  command: "list",
+  describe: "List notes",
+  handler: function () {
+    console.log("Listing notes...");
+  },
+});
+
+// create read command
+yargs.command({
+  command: "read",
+  describe: "Read a note",
+  handler: function () {
+    console.log("Reading a note!");
+  },
+});
+
+// <command> : add, remove, read, list
+
+yargs.parse();
