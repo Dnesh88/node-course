@@ -1,6 +1,8 @@
-const chalk = require("chalk");
-const yargs = require("yargs");
-const notes = require("./notes.js");
+// const yargs = require("yargs");
+// const notes = require("./notes.js");
+
+import yargs from "yargs";
+import { addNote, removeNote, listNote } from "./notes.js";
 
 // customize yargs version
 yargs.version("1.1.0");
@@ -22,7 +24,8 @@ yargs.command({
     },
   },
   handler: function (argv) {
-    notes.addNote(argv.title, argv.body);
+    // notes.addNote(argv.title, argv.body);
+    addNote(argv.title, argv.body);
   },
 });
 
@@ -38,7 +41,8 @@ yargs.command({
     },
   },
   handler: function (argv) {
-    notes.removeNote(argv.title);
+    // notes.removeNote(argv.title);
+    removeNote(argv.title);
   },
 });
 
@@ -47,7 +51,7 @@ yargs.command({
   command: "list",
   describe: "List notes",
   handler: function () {
-    console.log("Listing notes...");
+    listNote();
   },
 });
 
